@@ -47,10 +47,13 @@ export class UsersService {
     return this.afs.collection('users').doc(id).update(user);
   }
 
-  getUserEmail(email: string) {
-    return this.afs
-      .collection('users', (ref) => ref.where('email', '==', email))
-      .snapshotChanges();
+  getUserById(id: string) {
+    return this.afs.collection('users').doc(id).valueChanges();
+
+    // const resp = this.afs
+    //   .collection('users', (ref) => ref.where('id', '==', id))
+    //   .snapshotChanges();
+    // console.log('resp', resp);
   }
 
   deleteUser(user: User) {

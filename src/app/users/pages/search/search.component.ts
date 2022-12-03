@@ -9,12 +9,12 @@ import { UsersService } from '../../services/users.service';
 })
 export class SearchComponent {
   termino: string = '';
-  heroes: User[] = [];
-  UserSeleccionado: User | undefined;
+  users: User[] = [];
+  UserSeleccionado: User | any;
   constructor(private userService: UsersService) {}
 
   buscando() {
-    this.userService.getUsers().subscribe((heroes) => (this.heroes = heroes));
+    this.userService.getUsers().subscribe((users) => (this.users = users));
   }
   opcionSeleccionada(event: MatAutocompleteSelectedEvent) {
     if (!event.option.value) {
@@ -23,10 +23,12 @@ export class SearchComponent {
     }
 
     const user: User = event.option.value;
-    this.termino = user.nombre;
-
-    // this.userService
-    //   .getUsers(user.id!)
-    //   .subscribe((user) => (this.UserSeleccionado = user));
+    this.termino = user.usuario;
+    //this.UserSeleccionado = user.nombre;
+    //this.userService.getUserById(user.id!);.subscribe((userI) => console.log('userI', userI));
+    this.userService.getUserById(user.id!).subscribe((userI) => {
+      this.UserSeleccionado = userI;
+      //console.log('userIIIIIIIIIIII', userI);
+    });
   }
 }

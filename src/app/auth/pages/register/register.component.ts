@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -32,6 +33,11 @@ export class RegisterComponent implements OnInit {
     this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
+        Swal.fire(
+          'Usuario agregado!',
+          'El usuario fue registrado con éxito',
+          'success'
+        );
         this.router.navigate(['/auth/login']);
       })
       .catch((error) => {

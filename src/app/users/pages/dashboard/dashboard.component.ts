@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import * as Highcharts from 'highcharts';
+import HC_exporting from 'highcharts/modules/exporting';
+
 import { UsersService } from '../../services/users.service';
 import { User } from '../../interfaces/user.interface';
 @Component({
@@ -15,7 +17,68 @@ export class DashboardComponent {
     //this.getUsers();
   }
 
+  chartOptions1 = {};
   ngOnInit() {
+    this.chartOptions1 = {
+      chart: {
+        type: 'area',
+        backgroundColor: null,
+        borderwidth: 0,
+        margin: [2, 2, 2, 2],
+        height: 60,
+      },
+      title: {
+        text: null,
+      },
+      subtitle: {
+        text: null,
+      },
+      tooltip: {
+        split: true,
+        outside: true,
+      },
+      legend: {
+        enable: false,
+      },
+      creditos: {
+        enable: false,
+      },
+      exporting: {
+        enable: false,
+      },
+      xAxis: {
+        labels: {
+          enabled: false,
+        },
+        title: {
+          text: null,
+        },
+        startOnTick: false,
+        endOnTick: false,
+        tickOptions: [],
+      },
+      yAxis: {
+        labels: {
+          enabled: false,
+        },
+        title: {
+          text: null,
+        },
+        startOnTick: false,
+        endOnTick: false,
+        tickOptions: [],
+      },
+      series: [
+        {
+          data: [71, 78, 39, 66],
+        },
+      ],
+    };
+    HC_exporting(Highcharts);
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 300);
+
     this.chartOptions = {
       chart: {
         type: 'area',
